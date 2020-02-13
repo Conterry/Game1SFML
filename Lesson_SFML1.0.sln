@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_SFML1.0", "Lesson_SFML1.0\Lesson_SFML1.0.csproj", "{765766A2-48EA-42FB-AE35-5FD746156B98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{765766A2-48EA-42FB-AE35-5FD746156B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765766A2-48EA-42FB-AE35-5FD746156B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765766A2-48EA-42FB-AE35-5FD746156B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765766A2-48EA-42FB-AE35-5FD746156B98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDC0E36C-4649-47A1-A919-AC051A3F4389}
+	EndGlobalSection
+EndGlobal
