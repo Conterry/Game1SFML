@@ -14,8 +14,9 @@ namespace Lesson_SFML1._0
     {
         static void Main(string[] args)
         {
-
-            GameLauchParams lauchParams = new GameLauchParams();
+            Console.WriteLine("1 - играть с ботом");
+            Console.WriteLine("2 - играть с другом");
+            GameLaunchParams lauchParams = new GameLaunchParams();
             lauchParams.SecondGamer = int.Parse(Console.ReadLine());
 
             Game NewGame = new Game(lauchParams);

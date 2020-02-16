@@ -9,13 +9,15 @@ using SFML.System;
 
 namespace Lesson_SFML1._0
 {
-    struct GameLauchParams
+    struct GameLaunchParams
     {
         public int SecondGamer;
     }
 
     class Game
     {
+        GameLaunchParams launchParams;
+
         private RenderWindow window;
         private CircleShape Circle;
         private RectangleShape Rectangle1;
@@ -24,10 +26,6 @@ namespace Lesson_SFML1._0
         private Vector2f rectangleVelocity;
         private Vector2f rectangleVelocity2;
 
-        public Game(GameLauchParams lauchParams)
-        {
-
-        }
 
         private void Init()
         {
@@ -60,6 +58,8 @@ namespace Lesson_SFML1._0
         private float timeStep = 1 / TARGET_FPS;
         public int ControlPressed = 0;
         public int NewControlPressed = 0;
+        public int Control2Pressed = 0;
+        public int NewControl2Pressed = 0;
 
         public void Run()
         {
@@ -96,6 +96,7 @@ namespace Lesson_SFML1._0
 
         void SetRectangle2StartVector()
         {
+            
             float x = 0f;
             float y = 300f;
             rectangleVelocity2 = new Vector2f(x, y);
@@ -104,6 +105,7 @@ namespace Lesson_SFML1._0
         
 
         private bool WWasPressed;
+        private bool IWasPressed;
         void GetInput()
         {
             // check input events
@@ -123,14 +125,26 @@ namespace Lesson_SFML1._0
             {
                 WWasPressed = false;
             }
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.I))
+            {
+                if (!IWasPressed)
+                {
+                    NewControl2Pressed += 1;
+                }
+                IWasPressed = true;
+            }
+            else
+            {
+                IWasPressed = false;
+            }
         }
+
 
         void Logyc()
         {
             Circle.Position += circleVelocity * timeStep;
             Rectangle1.Position += rectangleVelocity * timeStep;
-            Rectangle2.Position += rectangleVelocity2 * timeStep;   
+             
 
             if (Circle.Position.X + 2 * CircleSize > FieldSizeX && circleVelocity.X > 0)
             {
@@ -163,6 +177,46 @@ namespace Lesson_SFML1._0
             {
                 circleVelocity *= 0;
                 rectangleVelocity *= 0;
+                rectangleVelocity2 *= 0;
+            }
+
+            if(launchParams.SecondGamer == 2)
+            {
+                Rectangle2.Position += rectangleVelocity2 * timeStep;
+                if (NewControl2Pressed > Control2Pressed || Rectangle2.Position.Y < 0 || Rectangle2.Position.Y > FieldSizeY - CircleSize * 2)
+                {
+                    rectangleVelocity2.Y *= -1;
+                    Control2Pressed = NewControl2Pressed;
+                    //отбитие от стен и на кнопку "W"
+                }
+
+                if (Circle.Position.X > Rectangle2.Position.X - 2 * CircleSize && Rectangle2.Position.Y - 3 * CircleSize > Circle.Position.Y && 2 * Rectangle2.Position.Y > Circle.Position.Y + CircleSize)
+                {
+                    circleVelocity.X *= -1;
+                }
+
+                if (Circle.Position.X < 0)
+                {
+                    circleVelocity *= 0;
+                    rectangleVelocity *= 0;
+                    rectangleVelocity2 *= 0;
+                }
+            }
+
+            if(launchParams.SecondGamer == 1)
+            {
+                Rectangle2.Position += rectangleVelocity2 * timeStep;
+                if (Rectangle2.Position.Y > Circle.Position.Y || Rectangle2.Position.Y < 0 || Rectangle2.Position.Y > FieldSizeY - CircleSize * 2)
+                {
+                    rectangleVelocity2.Y *= -1;
+                    Control2Pressed = NewControl2Pressed;
+                    //отбитие от стен и на кнопку "I"
+                }
+
+                if (Circle.Position.X > Rectangle2.Position.X - 2 * CircleSize && Rectangle2.Position.Y - 3 * CircleSize > Circle.Position.Y && 2 * Rectangle2.Position.Y > Circle.Position.Y + CircleSize)
+                {
+                    circleVelocity.X *= -1;
+                }
             }
 
         }
