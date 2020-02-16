@@ -4,13 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SFML.Window;
+using SFML.Graphics;
+using SFML.System;
+
 namespace Lesson_SFML1._0
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Game NewGame = new Game();
+
+            GameLauchParams lauchParams = new GameLauchParams();
+            lauchParams.SecondGamer = int.Parse(Console.ReadLine());
+
+            Game NewGame = new Game(lauchParams);
             NewGame.Run();
         }
     }

@@ -9,24 +9,40 @@ using SFML.System;
 
 namespace Lesson_SFML1._0
 {
+    struct GameLauchParams
+    {
+        public int SecondGamer;
+    }
+
     class Game
     {
         private RenderWindow window;
         private CircleShape Circle;
         private RectangleShape Rectangle1;
+        private RectangleShape Rectangle2;
         private Vector2f circleVelocity; // tipo speed toka vector
         private Vector2f rectangleVelocity;
+        private Vector2f rectangleVelocity2;
+
+        public Game(GameLauchParams lauchParams)
+        {
+
+        }
 
         private void Init()
         {
             Circle = new CircleShape(CircleSize);
             Rectangle1 = new RectangleShape(new Vector2f(RectangleX, RectangleY));
+            Rectangle2 = new RectangleShape(new Vector2f(RectangleX, RectangleY));
             Rectangle1.FillColor = Color.Black;
+            Rectangle2.FillColor = Color.Black;
             Circle.FillColor = Color.White;
             Circle.Position = new Vector2f(FieldSizeX / 2, FieldSizeY / 2);
             Rectangle1.Position = new Vector2f(10, FieldSizeY / 2);
+            Rectangle2.Position = new Vector2f(FieldSizeX - 10, FieldSizeY / 2);
             SetCircleStartVector();
             SetRectangleStartVector();
+            SetRectangle2StartVector();
 
             window = new RenderWindow(new VideoMode(FieldSizeX, FieldSizeY), "Почти игра");
             window.Closed += WindowClosed;
@@ -78,6 +94,15 @@ namespace Lesson_SFML1._0
             rectangleVelocity = new Vector2f(x, y);
         }
 
+        void SetRectangle2StartVector()
+        {
+            float x = 0f;
+            float y = 300f;
+            rectangleVelocity2 = new Vector2f(x, y);
+        }
+
+        
+
         private bool WWasPressed;
         void GetInput()
         {
@@ -105,6 +130,7 @@ namespace Lesson_SFML1._0
         {
             Circle.Position += circleVelocity * timeStep;
             Rectangle1.Position += rectangleVelocity * timeStep;
+            Rectangle2.Position += rectangleVelocity2 * timeStep;   
 
             if (Circle.Position.X + 2 * CircleSize > FieldSizeX && circleVelocity.X > 0)
             {
