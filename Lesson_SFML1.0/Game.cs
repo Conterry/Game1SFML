@@ -26,6 +26,10 @@ namespace Lesson_SFML1._0
         private Vector2f rectangleVelocity;
         private Vector2f rectangleVelocity2;
 
+        public Game(GameLaunchParams launchParams)
+        {
+            this.launchParams = launchParams;
+        }
 
         private void Init()
         {
@@ -51,7 +55,7 @@ namespace Lesson_SFML1._0
         public const int CircleSize = 30;
         private bool ExitKeyPressed;
         private const float RectangleX = 5;
-        private const float RectangleY = 50;
+        private const float RectangleY = 250;
         public const int FieldSizeX = 1600;
         public const int FieldSizeY = 900;
         public const float TARGET_FPS = 120f;
@@ -146,7 +150,7 @@ namespace Lesson_SFML1._0
             Rectangle1.Position += rectangleVelocity * timeStep;
              
 
-            if (Circle.Position.X + 2 * CircleSize > FieldSizeX && circleVelocity.X > 0)
+            if (Circle.Position.X + 2 * CircleSize > FieldSizeX-15)
             {
                 circleVelocity.X *= -1;
             }
@@ -167,8 +171,10 @@ namespace Lesson_SFML1._0
                 ControlPressed = NewControlPressed;
                 //отбитие от стен и на кнопку "W"
             }
-
-            if (Circle.Position.X < Rectangle1.Position.X + 2 * CircleSize && Rectangle1.Position.Y - 3 * CircleSize < Circle.Position.Y && 2 * Rectangle1.Position.Y > Circle.Position.Y + CircleSize)
+            
+            if (Circle.Position.X < Rectangle1.Position.X + RectangleX 
+                && Rectangle1.Position.Y - CircleSize < Circle.Position.Y 
+                && Rectangle1.Position.Y + RectangleY + CircleSize > Circle.Position.Y)
             {
                 circleVelocity.X *= -1;
             }
@@ -205,18 +211,20 @@ namespace Lesson_SFML1._0
 
             if(launchParams.SecondGamer == 1)
             {
-                Rectangle2.Position += rectangleVelocity2 * timeStep;
-                if (Rectangle2.Position.Y > Circle.Position.Y || Rectangle2.Position.Y < 0 || Rectangle2.Position.Y > FieldSizeY - CircleSize * 2)
+               /* Rectangle2.Position += rectangleVelocity2 * timeStep;
+                if (Rectangle2.Position.Y>FieldSizeY || Rectangle2.Position.Y - 2 * CircleSize<0)
                 {
                     rectangleVelocity2.Y *= -1;
-                    Control2Pressed = NewControl2Pressed;
-                    //отбитие от стен и на кнопку "I"
                 }
 
                 if (Circle.Position.X > Rectangle2.Position.X - 2 * CircleSize && Rectangle2.Position.Y - 3 * CircleSize > Circle.Position.Y && 2 * Rectangle2.Position.Y > Circle.Position.Y + CircleSize)
                 {
                     circleVelocity.X *= -1;
-                }
+                }*/
+
+                Vector2f pos = Rectangle2.Position;
+                pos.Y = Circle.Position.Y;
+                Rectangle2.Position = pos;
             }
 
         }
@@ -227,6 +235,7 @@ namespace Lesson_SFML1._0
 
             Circle.Draw(window, RenderStates.Default);
             Rectangle1.Draw(window, RenderStates.Default);
+            Rectangle2.Draw(window, RenderStates.Default);
 
             window.Display();
         }
