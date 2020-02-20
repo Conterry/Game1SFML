@@ -187,7 +187,7 @@ namespace Lesson_SFML1._0
             {
                 Rectangle2.Position += rectangleVelocity2 * timeStep;
 
-                if (Circle.Position.X > Rectangle2.Position.X
+                if (Circle.Position.X > Rectangle2.Position.X - 50
                 && Rectangle2.Position.Y - CircleSize < Circle.Position.Y
                 && Rectangle2.Position.Y + RectangleY + CircleSize > Circle.Position.Y)
                 {
