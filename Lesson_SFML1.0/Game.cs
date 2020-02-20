@@ -150,10 +150,7 @@ namespace Lesson_SFML1._0
             Rectangle1.Position += rectangleVelocity * timeStep;
              
 
-            if (Circle.Position.X + 2 * CircleSize > FieldSizeX-15)
-            {
-                circleVelocity.X *= -1;
-            }
+            
 
             if (Circle.Position.Y + 2 * CircleSize > FieldSizeY && circleVelocity.Y > 0)
             {
@@ -189,6 +186,14 @@ namespace Lesson_SFML1._0
             if(launchParams.SecondGamer == 2)
             {
                 Rectangle2.Position += rectangleVelocity2 * timeStep;
+
+                if (Circle.Position.X > Rectangle2.Position.X
+                && Rectangle2.Position.Y - CircleSize < Circle.Position.Y
+                && Rectangle2.Position.Y + RectangleY + CircleSize > Circle.Position.Y)
+                {
+                    circleVelocity.X *= -1;
+                }
+
                 if (NewControl2Pressed > Control2Pressed || Rectangle2.Position.Y < 0 || Rectangle2.Position.Y > FieldSizeY - CircleSize * 2)
                 {
                     rectangleVelocity2.Y *= -1;
@@ -196,12 +201,7 @@ namespace Lesson_SFML1._0
                     //отбитие от стен и на кнопку "W"
                 }
 
-                if (Circle.Position.X > Rectangle2.Position.X - 2 * CircleSize && Rectangle2.Position.Y - 3 * CircleSize > Circle.Position.Y && 2 * Rectangle2.Position.Y > Circle.Position.Y + CircleSize)
-                {
-                    circleVelocity.X *= -1;
-                }
-
-                if (Circle.Position.X < 0)
+                if (Circle.Position.X > FieldSizeX - 15)
                 {
                     circleVelocity *= 0;
                     rectangleVelocity *= 0;
@@ -211,16 +211,20 @@ namespace Lesson_SFML1._0
 
             if(launchParams.SecondGamer == 1)
             {
-               /* Rectangle2.Position += rectangleVelocity2 * timeStep;
-                if (Rectangle2.Position.Y>FieldSizeY || Rectangle2.Position.Y - 2 * CircleSize<0)
-                {
-                    rectangleVelocity2.Y *= -1;
-                }
+                /* Rectangle2.Position += rectangleVelocity2 * timeStep;
+                 if (Rectangle2.Position.Y>FieldSizeY || Rectangle2.Position.Y - 2 * CircleSize<0)
+                 {
+                     rectangleVelocity2.Y *= -1;
+                 }
 
-                if (Circle.Position.X > Rectangle2.Position.X - 2 * CircleSize && Rectangle2.Position.Y - 3 * CircleSize > Circle.Position.Y && 2 * Rectangle2.Position.Y > Circle.Position.Y + CircleSize)
+                 if (Circle.Position.X > Rectangle2.Position.X - 2 * CircleSize && Rectangle2.Position.Y - 3 * CircleSize > Circle.Position.Y && 2 * Rectangle2.Position.Y > Circle.Position.Y + CircleSize)
+                 {
+                     circleVelocity.X *= -1;
+                 }*/
+                if (Circle.Position.X + 2 * CircleSize > FieldSizeX - 15)
                 {
                     circleVelocity.X *= -1;
-                }*/
+                }
 
                 Vector2f pos = Rectangle2.Position;
                 pos.Y = Circle.Position.Y;
